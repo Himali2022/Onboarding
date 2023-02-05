@@ -75,14 +75,23 @@ namespace Mars.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Add my Description into profile page")]
+        [NUnit.Framework.DescriptionAttribute("Add my Language details into profile page")]
         [NUnit.Framework.CategoryAttribute("tag1")]
-        public void AddMyDescriptionIntoProfilePage()
+        [NUnit.Framework.TestCaseAttribute("Sinhala", "Fluent", null)]
+        [NUnit.Framework.TestCaseAttribute("English", "Fluent", null)]
+        public void AddMyLanguageDetailsIntoProfilePage(string language, string level, string[] exampleTags)
         {
-            string[] tagsOfScenario = new string[] {
+            string[] @__tags = new string[] {
                     "tag1"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add my Description into profile page", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            argumentsOfScenario.Add("Language", language);
+            argumentsOfScenario.Add("Level", level);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add my Language details into profile page", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -97,44 +106,9 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I logged into Mars page and navigate to profile page successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 10
- testRunner.When("I add my Desription to the profile page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 11
- testRunner.Then("I able to see the details in the description", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Add my Language details into profile page")]
-        [NUnit.Framework.TestCaseAttribute("Sinhala", "", "Fluent", null)]
-        [NUnit.Framework.TestCaseAttribute("English", "", "Fluent", null)]
-        public void AddMyLanguageDetailsIntoProfilePage(string language, string level, string _, string[] exampleTags)
-        {
-            string[] tagsOfScenario = exampleTags;
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("Language", language);
-            argumentsOfScenario.Add("Level", level);
-            argumentsOfScenario.Add("", _);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add my Language details into profile page", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 13
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 14
- testRunner.Given("I logged into Mars page and navigate to profile page successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 15
  testRunner.When(string.Format("I add my \'{0}\',\'{1}\' to the profile page", language, level), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 16
+#line 11
  testRunner.Then(string.Format("I able to see \'{0}\',\'{1}\' in the profile page", language, level), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -143,17 +117,16 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add my Skills into Profile page")]
-        [NUnit.Framework.TestCaseAttribute("Leadership", "", "Intermediate", null)]
-        [NUnit.Framework.TestCaseAttribute("Communication", "", "Expert", null)]
-        public void AddMySkillsIntoProfilePage(string skill, string level, string _, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("Leadership", "Intermediate", null)]
+        [NUnit.Framework.TestCaseAttribute("Communication", "Expert", null)]
+        public void AddMySkillsIntoProfilePage(string skill, string level, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("Skill", skill);
             argumentsOfScenario.Add("Level", level);
-            argumentsOfScenario.Add("", _);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add my Skills into Profile page", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 23
+#line 19
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -163,14 +136,14 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 24
+#line 20
  testRunner.Given("I logged into Mars page and navigate to profile page successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 25
- testRunner.When(string.Format("I add my \'{0}\',\'{1}\' to the profile page", skill, level), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 21
+ testRunner.When(string.Format("I add \'{0}\',\'{1}\' to the profile page", skill, level), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 26
- testRunner.Then(string.Format("I able to see \'{0}\',\'{1}\' in the profile page", skill, level), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 22
+ testRunner.Then(string.Format("I able to see \'{0}\',\'{1}\' in my profile page", skill, level), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -178,12 +151,19 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add my Education details into profile page")]
-        public void AddMyEducationDetailsIntoProfilePage()
+        [NUnit.Framework.TestCaseAttribute("Peradeniya", "Sri Lanka", "M.Tech", "Food Science", "2007", null)]
+        [NUnit.Framework.TestCaseAttribute("Peradeniya", "Sri Lanka", "B.Sc", "Agriculture", "2002", null)]
+        public void AddMyEducationDetailsIntoProfilePage(string university, string country, string title, string degree, string graduationYear, string[] exampleTags)
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("University", university);
+            argumentsOfScenario.Add("Country", country);
+            argumentsOfScenario.Add("Title", title);
+            argumentsOfScenario.Add("Degree", degree);
+            argumentsOfScenario.Add("GraduationYear", graduationYear);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add my Education details into profile page", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 33
+#line 29
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -193,14 +173,15 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 34
+#line 30
  testRunner.Given("I logged into Mars page and navigate to profile page successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 35
- testRunner.When("I add my Education details to the profile page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 31
+ testRunner.When(string.Format("I add my \'{0}\',\'{1}\',\'{2}\',\'{3}\',\'{4}\'to the profile page", university, country, title, degree, graduationYear), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 36
- testRunner.Then("I able to see my Education details in the profile page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 32
+ testRunner.Then(string.Format("I able to see \'{0}\',\'<ountry>\',\'{1}\',\'{2}\',\'<Graduation Year>\' in the profile pag" +
+                            "e", university, title, degree), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -208,12 +189,17 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add my Certifications into profile page")]
-        public void AddMyCertificationsIntoProfilePage()
+        [NUnit.Framework.TestCaseAttribute("SQL", "w3schools", "2022", null)]
+        [NUnit.Framework.TestCaseAttribute("C#", "w3schools", "2023", null)]
+        public void AddMyCertificationsIntoProfilePage(string certificate, string from, string year, string[] exampleTags)
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("Certificate", certificate);
+            argumentsOfScenario.Add("From", from);
+            argumentsOfScenario.Add("Year", year);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add my Certifications into profile page", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 38
+#line 39
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -223,14 +209,44 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 39
+#line 40
  testRunner.Given("I logged into Mars page and navigate to profile page successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 40
- testRunner.When("I add my\'<Certificate>\',\'<From>\',\'<Year>\' to the profile page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
 #line 41
+ testRunner.When(string.Format("I add my\'{0}\',\'{1}\',\'{2}\' to the profile page", certificate, from, year), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 42
  testRunner.Then("I able to see my Certifications in the profile page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Add my Description into profile page")]
+        public void AddMyDescriptionIntoProfilePage()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add my Description into profile page", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 50
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 51
+ testRunner.Given("I logged into Mars page and navigate to profile page successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 52
+ testRunner.When("I add my Desription to the profile page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 53
+ testRunner.Then("I able to see the details in the description", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

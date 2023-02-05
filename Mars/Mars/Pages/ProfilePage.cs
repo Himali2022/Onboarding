@@ -1,34 +1,52 @@
-﻿using OpenQA.Selenium.Internal;
+﻿using Mars.Utilities;
+using OpenQA.Selenium.Internal;
 using OpenQA.Selenium.Support.Events;
 using OpenQA.Selenium.Support.UI;
+using System.Diagnostics.Metrics;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Mars.Pages
 {
     public class ProfilePage : CommonDriver
     {
+        #region page objects
+        IWebElement addNewButton => driver.FindElement(By.XPath("//th/div[@class=\"ui teal button \"]"));
+        IWebElement addLanguageButton => driver.FindElement(By.XPath("//input[@name='name']"));
+        IWebElement chooseLanguageLevelDropdown => driver.FindElement(By.XPath("//select[@name='level']"));
+        IWebElement addButton => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/div/div[3]/input[1]"));
+        IWebElement skillButton => driver.FindElement(By.XPath("//a[@data-tab='second']"));
+        IWebElement addSkillButton => driver.FindElement(By.XPath("//input[@name='name']"));
+        IWebElement chooseSkillLevelDropdown => driver.FindElement(By.XPath("//select[@name='level']"));
+        IWebElement saddButton => driver.FindElement(By.XPath("//input[@class='ui teal button ']"));
+        IWebElement educationButton => driver.FindElement(By.XPath("//a[@class='item active']"));        
+        IWebElement collegeUniversityNameButton => driver.FindElement(By.XPath("//input[@name='instituteName']"));
+        IWebElement countryOfCollegeUniversityDropdown => driver.FindElement(By.XPath("//select[@name='country']"));
+        IWebElement titleDropdown => driver.FindElement(By.XPath("//select[@name='title']"));
+        IWebElement degreeButton => driver.FindElement(By.XPath("//input[@name='degree']"));
+        IWebElement yearOfGraduationDropdown => driver.FindElement(By.XPath("//select[@name='yearOfGraduation']"));
+        IWebElement eaddButton => driver.FindElement(By.XPath("//input[@class='ui teal button ']"));
+        #endregion
+
+
         public void CreateLanguage(string Language, string Level)
         {
+            Wait.WaitForElementToBeClickable(driver, "XPath", "//th/div[@class=\"ui teal button \"]", 20);
 
             //click on Add New button
-            IWebElement addNewButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/thead/tr/th[3]/div"));
             addNewButton.Click();
 
             //click on Add Language button and enter language
-            IWebElement addLanguageButton = driver.FindElement(By.XPath("//input[@name='name']"));
             addLanguageButton.SendKeys(Language);
-            Thread.Sleep(2000);
+            Wait.WaitForElementToBeClickable(driver, "XPath", "//select[@name='level']", 5);
 
             //click on Choose Language Level button and select level from dropdown
-            IWebElement chooseLanguageLevelDropdown = driver.FindElement(By.XPath("//select[@name='level']"));
             chooseLanguageLevelDropdown.Click();
-            Thread.Sleep(2000);
-            SelectElement selectChooseLanguageLevel = new SelectElement(driver.FindElement(By.XPath("//select[@name=\"level\"]")));
+            SelectElement selectChooseLanguageLevel = new SelectElement(driver.FindElement(By.Name("Level")));
             selectChooseLanguageLevel.SelectByText(Level);
 
-            //click on Add button
-            IWebElement addButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/div/div[3]/input[1]"));
+            //click on Add button            
             addButton.Click();
+
         }
 
         public string GetAddedLanguage()
@@ -36,98 +54,109 @@ namespace Mars.Pages
             IWebElement addedLanguage = driver.FindElement(By.XPath("//input[@name='name']"));
             return addedLanguage.Text;
         }
-        public string GetAddedLevel()
+        public string GetAddedLanguageLevel()
         {
-            IWebElement addedLevel = driver.FindElement(By.XPath("//select[@name=\"level\"]"));
-            return addedLevel.Text;
+            IWebElement addedLanguageLevel = driver.FindElement(By.XPath("//select[@name=\"level\"]"));
+            return addedLanguageLevel.Text;
         }
             
         public void CreateSkill(string Skill, string Level)
         {
 
             //click on skill button
-            IWebElement skillButton = driver.FindElement(By.XPath("//a[@data-tab='second']"));
             skillButton.Click();
 
+            Wait.WaitForElementToBeClickable(driver, "XPath", "//th/div[@class='ui teal button']", 5);
             //click on Add new button
-            IWebElement addNewButton = driver.FindElement(By.XPath("//th/div[@class='ui teal button']"));
             addNewButton.Click();
 
-            //click on Add Skill button and enter skill
-            IWebElement addSkillButton = driver.FindElement(By.XPath("//input[@name='name']"));
+            //click on Add Skill button and enter skill            
             addSkillButton.SendKeys(Skill);
-            Thread.Sleep(2000);
-
-            //click on Choose Skill Level dropdown and select level from dropdown
-            IWebElement chooseSkillLevelDropdown = driver.FindElement(By.XPath("//select[@name='level']"));
+            
+            //click on Choose Skill Level dropdown and select level from dropdown           
             chooseSkillLevelDropdown.Click();
             SelectElement selectchooseSkillLevel = new SelectElement(driver.FindElement(By.XPath("//select[@name='level']")));
             selectchooseSkillLevel.SelectByText(Level);
-            Thread.Sleep(2000);
 
             //click on Add button
-            IWebElement addButton = driver.FindElement(By.XPath("//input[@class='ui teal button ']"));
-            addButton.Click();
+            saddButton.Click();
+           
             
         }
         public string GetAddedSkill()
         {
-            IWebElement addedLanguage = driver.FindElement(By.XPath("//input[@name='name']"));
-            return addedLanguage.Text;
+            IWebElement addedSkill = driver.FindElement(By.XPath("//input[@name='name']"));
+            return addedSkill.Text;
         }
-        public string GetAddedLevel()
+        public string GetAddedSkillLevel()
         {
-            IWebElement addedLevel = driver.FindElement(By.XPath("//select[@name='level']"));
-            return addedLevel.Text;
+            IWebElement addedSkillLevel = driver.FindElement(By.XPath("//select[@name='level']"));
+            return addedSkillLevel.Text;
         }
 
 
-        public void CreateEducation()
+        public void CreateEducation(String Country,String University, String Title, String Degree, String GraduationYear)
         {
-            //click on Education button
-            IWebElement educationButton = driver.FindElement(By.XPath("//a[@class='item active']"));
+            //click on Education button            
             educationButton.Click();
+            Wait.WaitForElementToBeClickable(driver, "XPath", "//th/div[@class='ui teal button']", 5);
 
-            //click on Add New button
-            IWebElement addButton = driver.FindElement(By.XPath("//th/div[@class='ui teal button']"));
-            addButton.Click();
+            //click on Add New button            
+            addNewButton.Click();
 
-            //click on College/University Name button
-            IWebElement collegeUniversityNameButton = driver.FindElement(By.XPath("//input[@name='instituteName']"));
-            collegeUniversityNameButton.SendKeys("University of Peradeniya");
-            Thread.Sleep(3000);
+            //click on College/University Name button            
+            collegeUniversityNameButton.SendKeys(University);
+            Wait.WaitForElementToBeClickable(driver, "XPath", "//select[@name='country']", 5);
 
-            //click Country of College/University dropdown and choose country from dropdown
-            IWebElement countryOfCollegeUniversityDropdown = driver.FindElement(By.XPath("//select[@name='country']"));
+            //click Country of College/University dropdown and choose country from dropdown            
             countryOfCollegeUniversityDropdown.Click();
             SelectElement selectCountryOfCollegeUniversity = new SelectElement(driver.FindElement(By.XPath("//select[@name='country']")));
-            selectCountryOfCollegeUniversity.SelectByText("Sri Lanka");
-            Thread.Sleep(2000);
+            selectCountryOfCollegeUniversity.SelectByText(Country);
+            Wait.WaitForElementToBeClickable(driver, "XPath", "//select[@name='title']", 5);
 
-            //click on Title dropdown and select title
-            IWebElement titleDropdown = driver.FindElement(By.XPath("//select[@name='title']"));
+            //click on Title dropdown and select title            
             titleDropdown.Click();
             SelectElement selectTitleDropdown = new SelectElement(driver.FindElement(By.XPath("//select[@name='title']")));
-            selectTitleDropdown.SelectByText("M.Tech");
-            Thread.Sleep(2000);
+            selectTitleDropdown.SelectByText(Title);
+            Wait.WaitForElementToBeClickable(driver, "XPath", "//input[@name='degree']", 5);
 
-            //click on Degree button and enter degree
-            IWebElement degreeButton = driver.FindElement(By.XPath("//input[@name='degree']"));
-            degreeButton.SendKeys("Food Siecne and Technology");
-            Thread.Sleep(2000);
+            //click on Degree button and enter degree            
+            degreeButton.SendKeys(Degree);
+            Wait.WaitForElementToBeClickable(driver, "XPath", "//select[@name='yearOfGraduation']", 5);
 
-            //click on Year of graduation dropdown and select year
-            IWebElement yearOfGraduationDropdown = driver.FindElement(By.XPath("//select[@name='yearOfGraduation']"));
+            //click on Year of graduation dropdown and select year            
             yearOfGraduationDropdown.Click();
             SelectElement yearOfGraduationDropdown1 = new SelectElement(driver.FindElement(By.XPath("//select[@name='yearOfGraduation']")));
-            yearOfGraduationDropdown1.SelectByText("2007");
-            Thread.Sleep(2000);
+            yearOfGraduationDropdown1.SelectByText(GraduationYear);
 
-            //click on Add button
-            addButton = driver.FindElement(By.XPath("//input[@class='ui teal button ']"));
-            addButton.Click();
+            //click on Add button           
+            eaddButton.Click();
         }
 
-        
+        public string GetAddedUniversity()
+        {
+            IWebElement addedUniversity = driver.FindElement(By.XPath("//input[@name='instituteName']"));
+            return addedUniversity.Text;
+        }
+        public string GetAddedCountry()
+        {
+            IWebElement addedCountry = driver.FindElement(By.XPath("//select[@name='country']"));
+            return addedCountry.Text;
+        }
+        public string GetAddedTitle()
+        {
+            IWebElement addedTitle = driver.FindElement(By.XPath("//select[@name='title']"));
+            return addedTitle.Text;
+        }
+        public string GetAddedDegree()
+        {
+            IWebElement addedDegree = driver.FindElement(By.XPath("//input[@name='degree']"));
+            return addedDegree.Text;
+        }
+        public string GetAddedGraduationYear()
+        {
+            IWebElement addedGraduationYear = driver.FindElement(By.XPath("//select[@name='yearOfGraduation']"));
+            return addedGraduationYear.Text;
+        }
     }
 }

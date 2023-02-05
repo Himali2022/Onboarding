@@ -2,20 +2,19 @@
 
 namespace Mars.Pages
 {
-    public class loginPage : CommonDriver 
-
+    public class LoginPage: CommonDriver 
     {
-        public void CloseDriver()
-        {
-            driver.Quit();
-        }
+        
         public void LoginAction()
         {
             driver = new ChromeDriver();
-
+            driver.Manage().Window.Maximize();
+            
             //launch Mars page
 
             driver.Navigate().GoToUrl("http://localhost:5000");
+
+            Wait.WaitForElementToBeClickable(driver,"XPath","//a[@class='item']", 20);
 
             // click on sign in button
             IWebElement signinButton = driver.FindElement(By.XPath("//a[@class='item']"));
@@ -34,5 +33,10 @@ namespace Mars.Pages
             loginButton.Click();
 
         }
-    }
+        public void CloseDriver()
+        {
+            driver.Close();
+        }
+}
+
 }
