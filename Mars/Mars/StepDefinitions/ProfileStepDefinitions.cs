@@ -11,69 +11,26 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Mars.StepDefinitions
 {
-    namespace Constructor
+    [Binding]
+    public class ProfileStepDefinitions :CommonDriver
     {
-
-        public class profilePage
+        Mars.Pages.LoginPage loginPageObj;
+        Mars.Pages.ProfilePage profilePageObj;
+        public ProfileStepDefinitions()
         {
-
-            string Language;
-            string Title;
-
-            // parameterized constructor
-            ProfilePage (string Language, string Level)
-            {
-                Language = Language;
-                Level = Level;
-            }
-            static void Main(string[] args)
-            {
-
-                // call parameterized constructor
-                ProfilePage Language1 = new ProfilePage("Sinhala", "Fluent");
-                ProfilePage Language2 = new ProfilePage("English", "Fluent");
-
-                Console.WriteLine("Sinhala:" + Language1.Language);
-                Console.WriteLine("Fluent:" + Language1.Level);
-                Console.ReadLine();
-            }
-
-             ProfilePage(string Skill, string Level)
-            {
-                Skill = Skill;
-                Level = Level;
-            }
-            ProfilePage(String Country, String University, String Title, String Degree, int GraduationYear)
-            {
-                University = University;
-                Country = Country;
-                Title = Title;
-                Degree = Degree;
-                GraduationYear = GraduationYear;
-            }
-            
-                ProfilePage Skill1 = new ProfilePage("Leadership", "Intermediate");
-                ProfilePage Skill2 = new ProfilePage("Communication", 'Expert');
-                ProfilePage Education1 = new ProfilePage("Peradeniya",'Sri Lanka','M.Tech', "Food Science", 2007);
-                ProfilePage Education2 = new ProfilePage("Peradeniya", 'Sri Lanka','B.Sc', "Agriculture", 2002);
-                            
-            }
+            loginPageObj = new Mars.Pages.LoginPage();
+            profilePageObj = new Mars.Pages.ProfilePage();
         }
-    }
-
         
-
         [Given(@"I logged into Mars page and navigate to profile page successfully")]
         public void GivenILoggedIntoMarsPageAndNavigateToProfilePageSuccessfully()
         {
-            loginPageObj = new Mars.Pages.LoginPage();
             loginPageObj.LoginAction();
         }
 
         [When(@"I add my '([^']*)','([^']*)' to the profile page")]
         public void WhenIAddMyToTheProfilePage(string Language, string Level)
         {
-            var profilePageObj = new Mars.Pages.ProfilePage();
             profilePageObj.CreateLanguage(Language, Level);
         }
 
@@ -91,7 +48,6 @@ namespace Mars.StepDefinitions
         [When(@"I add '([^']*)','([^']*)' to the profile page")]
         public void WhenIAddToTheProfilePage(string Skill, string Level)
         {
-            var profilePageObj = new Mars.Pages.ProfilePage();
             profilePageObj.CreateSkill(Skill, Level);
         }
 
@@ -110,7 +66,6 @@ namespace Mars.StepDefinitions
         [When(@"I add my '([^']*)','([^']*)','([^']*)','([^']*)','([^']*)'to the profile page")]
         public void WhenIAddMyToTheProfilePage(string University, string Country, string Title, string Degree, string GraduationYear)
         {
-            var profilePageObj = new Mars.Pages.ProfilePage();
             profilePageObj.CreateEducation(Country, University, Title, Degree, GraduationYear);
         }
 

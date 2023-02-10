@@ -10,6 +10,7 @@ namespace Mars.Pages
     public class ProfilePage : CommonDriver
     {
         #region page objects
+        IWebElement LanguageButton => driver.FindElement(By.XPath("//a[@data-tab='first']"));
         IWebElement addNewButton => driver.FindElement(By.XPath("//th/div[@class=\"ui teal button \"]"));
         IWebElement addLanguageButton => driver.FindElement(By.XPath("//input[@name='name']"));
         IWebElement chooseLanguageLevelDropdown => driver.FindElement(By.XPath("//select[@name='level']"));
@@ -17,7 +18,7 @@ namespace Mars.Pages
         IWebElement skillButton => driver.FindElement(By.XPath("//a[@data-tab='second']"));
         IWebElement addSkillButton => driver.FindElement(By.XPath("//input[@name='name']"));
         IWebElement chooseSkillLevelDropdown => driver.FindElement(By.XPath("//select[@name='level']"));
-        IWebElement saddButton => driver.FindElement(By.XPath("//input[@class='ui teal button ']"));
+        IWebElement saddButton => driver.FindElement(By.XPath("//input[@class='ui teal button']"));
         IWebElement educationButton => driver.FindElement(By.XPath("//a[@class='item active']"));        
         IWebElement collegeUniversityNameButton => driver.FindElement(By.XPath("//input[@name='instituteName']"));
         IWebElement countryOfCollegeUniversityDropdown => driver.FindElement(By.XPath("//select[@name='country']"));
@@ -31,6 +32,9 @@ namespace Mars.Pages
         public void CreateLanguage(string Language, string Level)
         {
             Wait.WaitForElementToBeClickable(driver, "XPath", "//th/div[@class=\"ui teal button \"]", 20);
+
+            //click on Language Button
+            LanguageButton.Click();
 
             //click on Add New button
             addNewButton.Click();
